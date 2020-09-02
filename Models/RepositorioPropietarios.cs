@@ -10,8 +10,14 @@ namespace Inmobiliaria.Models
 {
     public class RepositorioPropietarios
     {
-		private readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BDInmo;Integrated Security=True;";
+		private readonly string connectionString;
+		private readonly IConfiguration configuration;
 
+		public RepositorioPropietarios(IConfiguration configuration)
+		{
+			this.configuration = configuration;
+			connectionString = configuration["ConnectionStrings:DefaultConnection"];
+		}
 		public int Alta(Propietarios p)
 		{
 			int res = -1;

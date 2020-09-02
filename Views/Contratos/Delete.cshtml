@@ -1,0 +1,62 @@
+﻿@model Inmobiliaria.Models.Contratos
+
+@{
+    ViewData["Title"] = "Eliminar Contrato";
+}
+
+<h1>Eliminar Registro</h1>
+
+<h3>Esta seguro, que desea Eliminar el registro del Contrato???</h3>
+<div>
+    <h4>Contratos</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdContr)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdContr)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdInq)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdInq)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdInm)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdInm)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaCierre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FechaCierre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Monto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Monto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vigente)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vigente)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Borrar Contrato" class="btn btn-danger" /> |
+        <a asp-action="Index">Regresar a Contratos</a>
+    </form>
+</div>

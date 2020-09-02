@@ -122,3 +122,11 @@ C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\P
 C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Propietarios\Delete.cshtml.g.cs
 C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Inquilinos\Edit.cshtml.g.cs
 C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Inquilinos\Delete.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Inmuebles\Index.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Inmuebles\Create.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Inmuebles\Edit.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Inmuebles\Delete.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Contratos\Index.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Contratos\Create.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Contratos\Edit.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Contratos\Delete.cshtml.g.cs
