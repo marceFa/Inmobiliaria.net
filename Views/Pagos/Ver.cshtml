@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Pagos>
+
+@{ ViewData["Title"] = "Ver"; }
+
+<h2>Ver</h2>
+
+<p>
+    <h4>Contrato:@ViewBag.Contratos.IdContr Inquilino: @ViewBag.Contratos.Inquilinos.Nombre  @ViewBag.Contratos.Inquilinos.Apellido</h4>
+    <h4>Inmueble: @ViewBag.Contratos.Inmuebles.Tipo @ViewBag.Contratos.Inmuebles.Direccion</h4>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>ID Pago</label>
+            </th>
+            <th>
+                <label>Numero De Pago</label>
+            </th>
+            <th>
+                <label>Contrato</label>
+            </th>
+            <th>
+                <label>Fecha De Pago</label>
+            </th>
+            <th>
+                <label>Importe</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.IdPago)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumPago)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IdContr)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FechaPago)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Importe)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.IdPago }) |
+
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPago }) |
+    </td>
+
+</tr>}       @Html.ActionLink("Realizar Pago", "Create", "Pagos", new { id = @ViewBag.Contratos.IdInm })
+</tbody>
+</table>

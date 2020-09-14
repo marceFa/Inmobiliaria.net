@@ -1,0 +1,51 @@
+﻿@model Inmobiliaria.Models.Pagos
+
+@{
+    ViewData["Title"] = "Eliminar Pagos";
+}
+
+<h2>Eliminar Registro de Pagos</h2>
+
+<h3>Esta seguro, que desea Eliminar el Pago???</h3>
+<div>
+    <h4>Pagos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <label>ID Pago</label>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdPago)
+        </dd>
+        <dt>
+            <label>Numero De Pago</label>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumPago)
+        </dd>
+        <dt>
+            <label>ID Contrato</label>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdContr)
+        </dd>
+        <dt>
+            <label>Fecha De Pago</label>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaPago)
+        </dd>
+        <dt>
+            <label>Importe</label>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Importe)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Borrar Pago" class="btn btn-danger" /> |
+        @Html.ActionLink("Regresar a Listado", "Index", "Inmuebles");
+        
+    </form>
+</div>

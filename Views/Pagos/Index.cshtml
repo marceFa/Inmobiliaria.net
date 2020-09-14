@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Pagos>
+
+@{
+    ViewData["Title"] = "Inicio Pagos";
+}
+
+<h2>Listado de Pagos</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdContr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Importe)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPago)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumPago)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdContr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaPago)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Importe)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id=item.IdPago}) |
+                
+                @Html.ActionLink("Eliminar", "Delete", new { id=item.IdPago })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
