@@ -30,6 +30,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.DireccionTrabajo)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre_Garante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dni_Garante)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -55,9 +61,15 @@
                 @Html.DisplayFor(modelItem => item.DireccionTrabajo)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { Id=item.IdInq}) |
-                @Html.ActionLink("Detalles", "Details", new { id=item.IdInq}) |
-                @Html.ActionLink("Eliminar", "Delete", new { id=item.IdInq})
+                @Html.DisplayFor(modelItem => item.Nombre_Garante)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dni_Garante)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { Id = item.IdInq }) |
+                
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdInq })
             </td>
         </tr>
 }

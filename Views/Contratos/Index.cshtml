@@ -4,11 +4,10 @@
     ViewData["Title"] = "Lista de Contratos";
 }
 
-<h1>Contratos</h1>
+<h2>Contratos</h2>
+<h4> @Html.ActionLink("Buscar Contratos Vigentes", "Busqueda", "Contratos")</h4>
 
-<p>
-    <a asp-action="Create">Agregar Nuevo Contrato</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -16,10 +15,10 @@
                 @Html.DisplayNameFor(model => model.IdContr)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdInq)
+                @Html.DisplayNameFor(model => model.Inquilinos)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdInm)
+                @Html.DisplayNameFor(model => model.Inmuebles)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaInicio)
@@ -43,10 +42,10 @@
                 @Html.DisplayFor(modelItem => item.IdContr)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdInq)
+                @(item.Inquilinos.Nombre + " " + item.Inquilinos.Apellido)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdInm)
+                @(item.Inmuebles.Tipo + " " + item.Inmuebles.Direccion)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaInicio)
@@ -62,7 +61,7 @@
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id=item.IdContr}) |
-                @Html.ActionLink("Detalles", "Details", new { id=item.IdContr }) |
+                
                 @Html.ActionLink("Eliminar", "Delete", new { id=item.IdContr })
             </td>
         </tr>

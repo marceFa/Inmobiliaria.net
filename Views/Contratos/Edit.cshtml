@@ -4,7 +4,7 @@
     ViewData["Title"] = "Actualizar Contratos";
 }
 
-<h1>Actualizar Datos</h1>
+<h2>Actualizar Datos</h2>
 
 <h4>Contratos</h4>
 <hr />
@@ -13,15 +13,15 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="IdContr" class="control-label"></label>
-                <input asp-for="IdContr" class="form-control" />
-                <span asp-validation-for="IdContr" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdInq" class="control-label"></label>
-                <input asp-for="IdInq" class="form-control" />
-                <span asp-validation-for="IdInq" class="text-danger"></span>
-            </div>
+             <label class="control-label">Inquilinos</label>
+             <select class="form-control" name="IdInq">
+                        @foreach (var item in (IList<Inquilinos>)ViewBag.Inquilinos)
+                        {
+             @:<option @(item.IdInq == Model.IdInq ? "selected" : "") value="@item.IdInq">@(item.Nombre + " " + item.Apellido)</option>
+             }
+             </select>
+             <span asp-validation-for="IdInq" class="text-danger"></span>
+             </div>
             <div class="form-group">
                 <label asp-for="IdInm" class="control-label"></label>
                 <input asp-for="IdInm" class="form-control" />

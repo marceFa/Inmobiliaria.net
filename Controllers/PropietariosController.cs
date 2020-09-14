@@ -51,12 +51,11 @@ namespace Inmobiliaria.Controllers
                 if (ModelState.IsValid)
                 {
                     int res = repositorioPropietarios.Alta(p);
-                    TempData["Mensaje"] = "El Propietario ha sido Registrado";
                     return RedirectToAction(nameof(Index));
                 }
                 else
                 {
-                    TempData["Mensaje"] = "Error de registro Verifique datos!!!";
+                    ModelState.AddModelError("", "Error de registro Verifique datos!!!"); 
                     return View();
                 }
                 
@@ -94,7 +93,6 @@ namespace Inmobiliaria.Controllers
                 p.Email = collection["Email"];
                 p.Telefono = collection["Telefono"];
                 repositorioPropietarios.Modificacion(p);
-                TempData["Mensaje"] = "Datos guardados correctamente";
                 return RedirectToAction(nameof(Index));
 
             }
@@ -126,7 +124,6 @@ namespace Inmobiliaria.Controllers
             try
             {
                 repositorioPropietarios.Baja(id);
-                TempData["Mensaje"] = "El Propietario ha sido Eliminado";
                 return RedirectToAction(nameof(Index));
                 
             }

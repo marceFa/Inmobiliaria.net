@@ -4,9 +4,8 @@
     ViewData["Title"] = "Agregar Inquilino";
 }
 
-<h1>Agregar Nuevo Inquilino</h1>
 
-<h4>Inquilinos</h4>
+<h2>Inquilinos</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -36,6 +35,16 @@
                 <label asp-for="DireccionTrabajo" class="control-label"></label>
                 <input asp-for="DireccionTrabajo" class="form-control" />
                 <span asp-validation-for="DireccionTrabajo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre_Garante" class="control-label"></label>
+                <input asp-for="Nombre_Garante" class="form-control" />
+                <span asp-validation-for="Nombre_Garante" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dni_Garante" class="control-label"></label>
+                <input asp-for="Dni_Garante" class="form-control" />
+                <span asp-validation-for="Dni_Garante" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Agregar" class="btn btn-primary" />

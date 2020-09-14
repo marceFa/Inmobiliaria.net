@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Inmobiliaria.Models;
 
+
 namespace Inmobiliaria.Controllers
 {
     public class InmueblesController : Controller
@@ -21,59 +22,57 @@ namespace Inmobiliaria.Controllers
             repositorioPropietarios = new RepositorioPropietarios(configuration);
             repositorioInmuebles = new RepositorioInmuebles(configuration);
         }
-        // GET: InmueblesController
+        // GET: Inmuebles
         public ActionResult Index()
         {
             var lista = repositorioInmuebles.ObtenerTodos();
-            if (TempData.ContainsKey("Id"))
-                ViewBag.Id = TempData["Id"];
-            if (TempData.ContainsKey("Mensaje"))
-                ViewBag.Mensaje = TempData["Mensaje"];
             return View(lista);
         }
 
-        // GET: InmueblesController/Details/5
-        public ActionResult Details(int id)
+        // GET: Inmuebles/Details/5
+        public ActionResult Disponibles(int id)
         {
             var lista = repositorioInmuebles.ObtenerSiDisponible();
             return View(lista);
         }
 
-        // GET: InmueblesController/Create
+        // GET: Inmuebles/Create
+       
         public ActionResult Create()
         {
             ViewBag.Propietarios = repositorioPropietarios.ObtenerTodos();
             return View();
         }
 
-        // POST: InmueblesController/Create
+        // POST: Inmuebles/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult Create(Inmuebles i)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    repositorioInmuebles.Alta(i);
-                    TempData["Id"] = i.IdInm;
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    ViewBag.Propietarios = repositorioPropietarios.ObtenerTodos();
-                    return View(i);
-                }
+                int res = repositorioInmuebles.Alta(i);
+                repositorioInmuebles.Disponible(i);
+                return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch
             {
-                ViewBag.Error = ex.Message;
-                ViewBag.StackTrate = ex.StackTrace;
-                return View(i);
+                return View();
             }
         }
+        public IActionResult InmPorProp(int id)
+        {
+            var i = repositorioInmuebles.BuscarPorPropietario(id);
+            return View(i);
 
-        // GET: InmueblesController/Edit/5
+        }
+        public ActionResult EditDeUs(int id)
+        {
+            var i = repositorioInmuebles.ObtenerPorId(id);
+            return View(i);
+        }
+        // GET: Inmuebles/Edit/5
+        
         public ActionResult Edit(int id)
         {
             var i = repositorioInmuebles.ObtenerPorId(id);
@@ -85,18 +84,17 @@ namespace Inmobiliaria.Controllers
             return View(i);
         }
 
-        // POST: InmueblesController/Edit/5
+        // POST: Inmuebles/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult Edit(int id, Inmuebles i)
         {
             try
             {
+
                 i.IdInm = id;
                 repositorioInmuebles.Modificacion(i);
-                TempData["Mensaje"] = "Datos guardados con exito!!!!";
                 return RedirectToAction(nameof(Index));
-
             }
             catch (Exception ex)
             {
@@ -107,7 +105,8 @@ namespace Inmobiliaria.Controllers
             }
         }
 
-        // GET: InmueblesController/Delete/5
+        // GET: Inmuebles/Delete/5
+        
         public ActionResult Delete(int id)
         {
             var i = repositorioInmuebles.ObtenerPorId(id);
@@ -118,15 +117,15 @@ namespace Inmobiliaria.Controllers
             return View(i);
         }
 
-        // POST: InmueblesController/Delete/5
+        // POST: Inmuebles/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
+                
         public ActionResult Delete(int id, Inmuebles i)
         {
             try
             {
                 repositorioInmuebles.Baja(id);
-                TempData["Mensaje"] = "El Inmueble fue eliminado!";
+                
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -136,5 +135,42 @@ namespace Inmobiliaria.Controllers
                 return View(i);
             }
         }
+        public ActionResult Filtrados()
+        {
+            return View();
+        }
+        public ActionResult Busqueda()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Busqueda(BusquedaView busqueda)
+        {
+            try
+            {
+                if (busqueda.FechaInicio > busqueda.FechaCierre)
+                {
+                    ModelState.AddModelError("", "La Fecha de Inicio debe ser anterior a la de cierre");
+                    return View();
+                }
+                else
+                {
+                    ViewBag.Filtrados = repositorioInmuebles.BuscarDesocupados(busqueda.FechaInicio, busqueda.FechaCierre);
+                    if (ViewBag.Filtrados.Count == 0)
+                    {
+                        ModelState.AddModelError("", "No se encontraron resultados");
+                        return View();
+                    }
+                    return View("Filtrados");
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+            }
+        }
+
     }
 }

@@ -11,10 +11,25 @@ namespace Inmobiliaria.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IConfiguration configuration;
+        private readonly RepositorioInmuebles repositorioInmuebles;
+        private readonly RepositorioPropietarios repositorioPropietarios;
+
+        public HomeController(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+            repositorioInmuebles = new RepositorioInmuebles(configuration);
+            repositorioPropietarios = new RepositorioPropietarios(configuration);
+        }
         // GET: HomeController1
         public ActionResult Index()
         {
             return View();
+        }
+        public IActionResult Galeria()
+        {
+            var lista = repositorioInmuebles.ObtenerTodos();
+            return View(lista);
         }
 
         // GET: HomeController1/Details/5

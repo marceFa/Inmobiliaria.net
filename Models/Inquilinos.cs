@@ -13,5 +13,7 @@ namespace Inmobiliaria.Models
         public string Dni { get; set; }
         public string Telefono { get; set; }
         public string DireccionTrabajo { get; set; }
+        public string Nombre_Garante { get; set; }
+        public string Dni_Garante { get; set; }
     }
 }

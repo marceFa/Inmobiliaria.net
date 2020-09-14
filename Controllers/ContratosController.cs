@@ -68,6 +68,21 @@ namespace Inmobiliaria.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
+        public ActionResult Ver(int id)
+        {
+            try
+            {
+                ViewBag.Id = id;
+                var lista = repositorioContratos.ObtenerTodosPorInm(id);
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+
+            }
+        }
 
         // GET: ContratosController/Edit/5
         public ActionResult Edit(int id)
@@ -90,7 +105,6 @@ namespace Inmobiliaria.Controllers
             {
                 c.IdContr = id;
                 repositorioContratos.Modificacion(c);
-                TempData["Mensaje"] = "Datos guardados con exito!!!!";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -121,7 +135,6 @@ namespace Inmobiliaria.Controllers
             try
             {
                 repositorioContratos.Baja(id);
-                TempData["Mensaje"] = "El Contrato fue eliminado!";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -129,6 +142,35 @@ namespace Inmobiliaria.Controllers
                 ViewBag.Error = ex.Message;
                 ViewBag.StackTrate = ex.StackTrace;
                 return View(c);
+            }
+        }
+        public ActionResult Filtrados()
+        {
+            return View();
+        }
+        public ActionResult Busqueda()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Busqueda(PorFechaView busqueda)
+        {
+            try
+            {
+
+                ViewBag.Filtrados = repositorioContratos.VigentesPorFecha(busqueda.FechaBusqueda);
+                if (ViewBag.Filtrados.Count == 0)
+                {
+                    ModelState.AddModelError("", "No se encontraron resultados");
+                    return View();
+                }
+                return View("Filtrados");
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
             }
         }
     }

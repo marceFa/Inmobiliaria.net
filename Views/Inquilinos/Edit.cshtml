@@ -1,7 +1,7 @@
 ﻿@model Inmobiliaria.Models.Inquilinos
 
 @{
-    ViewData["Title"] = "Actualizar Inquilino";
+    ViewData["Title"] = "Actualizar";
 }
 
 <h1>Actualizar Datos</h1>
@@ -43,13 +43,23 @@
                 <span asp-validation-for="DireccionTrabajo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <label asp-for="Nombre_Garante" class="control-label"></label>
+                <input asp-for="Nombre_Garante" class="form-control" />
+                <span asp-validation-for="Nombre_Garante" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dni_Garante" class="control-label"></label>
+                <input asp-for="Dni_Garante" class="form-control" />
+                <span asp-validation-for="Dni_Garante" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Regresar al Listado Inquilinos</a>
+    <a asp-action="Index">Regresar a Listado Inquilinos</a>
 </div>
 

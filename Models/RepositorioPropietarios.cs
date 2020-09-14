@@ -143,5 +143,37 @@ namespace Inmobiliaria.Models
 			}
 			return p;
 		}
+		public IList<Propietarios> BuscarPorNombre(string nombre)
+		{
+			List<Propietarios> res = new List<Propietarios>();
+			Propietarios p = null;
+			using (SqlConnection connection = new SqlConnection(connectionString))
+			{
+				string sql = $"SELECT IdProp, Nombre, Apellido, Dni, Telefono, Email FROM Propietarios" +
+					$" WHERE Nombre LIKE %@nombre% OR Apellido LIKE %@nombre";
+				using (SqlCommand command = new SqlCommand(sql, connection))
+				{
+					command.Parameters.Add("@nombre", SqlDbType.VarChar).Value = nombre;
+					command.CommandType = CommandType.Text;
+					connection.Open();
+					var reader = command.ExecuteReader();
+					while (reader.Read())
+					{
+						p = new Propietarios
+						{
+							IdProp = reader.GetInt32(0),
+							Nombre = reader.GetString(1),
+							Apellido = reader.GetString(2),
+							Dni = reader.GetString(3),
+							Telefono = reader.GetString(4),
+							Email = reader.GetString(5),
+						};
+						res.Add(p);
+					}
+					connection.Close();
+				}
+			}
+			return res;
+		}
 	}
 }

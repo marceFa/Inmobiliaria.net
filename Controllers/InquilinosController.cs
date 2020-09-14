@@ -6,7 +6,7 @@ using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Inmobiliaria.Models;
+
 
 namespace Inmobiliaria.Controllers
 {
@@ -50,12 +50,11 @@ namespace Inmobiliaria.Controllers
                 if (ModelState.IsValid)
                 {
                     int res = repositorioInquilinos.Alta(i);
-                    TempData["Mensaje"] = "El Inquilino ha sido Registrado";
                     return RedirectToAction(nameof(Index));
                 }
                 else
                 {
-                    TempData["Mensaje"] = "Error de registro Verifique datos!!!";
+                    ModelState.AddModelError("", "Error de registro, verifique Datos!!!");
                     return View();
                 }
                 
@@ -92,8 +91,9 @@ namespace Inmobiliaria.Controllers
                 i.Dni = collection["Dni"];
                 i.Telefono = collection["Telefono"];
                 i.DireccionTrabajo = collection["DireccionTrabajo"];
+                i.Nombre_Garante = collection["Nombre_Garante"];
+                i.Dni_Garante = collection["Dni_Garante"];
                 repositorioInquilinos.Modificacion(i);
-                TempData["Mensaje"] = "Datos guardados con Exito!!";
                 return RedirectToAction(nameof(Index));
 
             }
@@ -125,7 +125,6 @@ namespace Inmobiliaria.Controllers
             try
             {
                 repositorioInquilinos.Baja(id);
-                TempData["Mensaje"] = "El Inquilino ha sido Eliminado";
                 return RedirectToAction(nameof(Index));
 
 

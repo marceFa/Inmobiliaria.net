@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Inmobiliaria.Models
 {
     public class RepositorioInquilinos
@@ -23,8 +24,8 @@ namespace Inmobiliaria.Models
 			int res = -1;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"INSERT INTO Inquilinos (Nombre, Apellido, Dni, Telefono, DireccionTrabajo) " +
-					$"VALUES (@nombre, @apellido, @dni, @telefono, @trabajo);" +
+				string sql = $"INSERT INTO Inquilinos (Nombre, Apellido, Dni, Telefono, DireccionTrabajo, Nombre_Garante, Dni_Garante) " +
+					$"VALUES (@nombre, @apellido, @dni, @telefono, @trabajo, @nombre_garante, @dni_garante);" +
 					$"SELECT SCOPE_IDENTITY();";//devuelve el id insertado
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -34,6 +35,8 @@ namespace Inmobiliaria.Models
 					command.Parameters.AddWithValue("@dni", i.Dni);
 					command.Parameters.AddWithValue("@telefono", i.Telefono);
 					command.Parameters.AddWithValue("@trabajo", i.DireccionTrabajo);
+					command.Parameters.AddWithValue("@nombre_garante", i.Nombre_Garante);
+					command.Parameters.AddWithValue("@dni_garante", i.Dni_Garante);
 					connection.Open();
 					res = Convert.ToInt32(command.ExecuteScalar());
 					i.IdInq = res;
@@ -64,7 +67,7 @@ namespace Inmobiliaria.Models
 			int res = -1;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"UPDATE Inquilinos SET Nombre=@nombre, Apellido=@apellido, Dni=@dni, Telefono=@telefono, DireccionTrabajo=@trabajo " +
+				string sql = $"UPDATE Inquilinos SET Nombre=@nombre, Apellido=@apellido, Dni=@dni, Telefono=@telefono, DireccionTrabajo=@trabajo, Nombre_Garante=@nombre_garante, Dni_Garante=@dni_garante " +
 					$"WHERE IdInq = @id";
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -74,6 +77,8 @@ namespace Inmobiliaria.Models
 					command.Parameters.AddWithValue("@dni", i.Dni);
 					command.Parameters.AddWithValue("@telefono", i.Telefono);
 					command.Parameters.AddWithValue("@trabajo", i.DireccionTrabajo);
+					command.Parameters.AddWithValue("@nombre_garante", i.Nombre_Garante);
+					command.Parameters.AddWithValue("@dni_garante", i.Dni_Garante);
 					command.Parameters.AddWithValue("@id", i.IdInq);
 					connection.Open();
 					res = command.ExecuteNonQuery();
@@ -88,7 +93,7 @@ namespace Inmobiliaria.Models
 			IList<Inquilinos> res = new List<Inquilinos>();
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"SELECT IdInq, Nombre, Apellido, Dni, Telefono, DireccionTrabajo" +
+				string sql = $"SELECT IdInq, Nombre, Apellido, Dni, Telefono, DireccionTrabajo, Nombre_Garante, Dni_Garante" +
 					$" FROM Inquilinos";
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -105,6 +110,8 @@ namespace Inmobiliaria.Models
 							Dni = reader.GetString(3),
 							Telefono = reader.GetString(4),
 							DireccionTrabajo = reader.GetString(5),
+							Nombre_Garante = reader.GetString(6),
+							Dni_Garante = reader.GetString(7),
 						};
 						res.Add(i);
 					}
@@ -118,7 +125,7 @@ namespace Inmobiliaria.Models
 			Inquilinos i = null;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"SELECT IdInq, Nombre, Apellido, Dni, Telefono, DireccionTrabajo FROM Inquilinos" +
+				string sql = $"SELECT IdInq, Nombre, Apellido, Dni, Telefono, DireccionTrabajo, Nombre_Garante, Dni_Garante FROM Inquilinos" +
 					$" WHERE IdInq=@id";
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -136,6 +143,8 @@ namespace Inmobiliaria.Models
 							Dni = reader.GetString(3),
 							Telefono = reader.GetString(4),
 							DireccionTrabajo= reader.GetString(5),
+							Nombre_Garante = reader.GetString(6),
+							Dni_Garante = reader.GetString(7),
 							
 						};
 					}
