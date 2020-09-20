@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,30 +21,33 @@ namespace Inmobiliaria.Controllers
             this.configuration = configuration;
             repositorioPropietarios = new RepositorioPropietarios(configuration);
         }
-        
 
-        // GET: PropietariosController
+
+        // GET: Propietarios
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Index()
         {
             var lista = repositorioPropietarios.ObtenerTodos();
             return View(lista);
         }
 
-        // GET: PropietariosController/Details/5
+        // GET: Propietarios/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: PropietariosController/Create
+        // GET: Propietarios/Create
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: PropietariosController/Create
+        // POST: Propietarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Create(Propietarios p)
         {
             try
@@ -66,7 +70,8 @@ namespace Inmobiliaria.Controllers
             }
         }
 
-        // GET: PropietariosController/Edit/5
+        // GET: Propietarios/Edit/5
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Edit(int id)
         {
             var p = repositorioPropietarios.ObtenerPorId(id);
@@ -78,9 +83,10 @@ namespace Inmobiliaria.Controllers
             
         }
 
-        // POST: PropietariosController/Edit/5
+        // POST: Propietarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Edit(int id, IFormCollection collection)
         {
             Propietarios p = null;
@@ -104,7 +110,8 @@ namespace Inmobiliaria.Controllers
             }
         }
 
-        // GET: PropietariosController/Delete/5
+        // GET: Propietarios/Delete/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)
         {
             var p = repositorioPropietarios.ObtenerPorId(id);
@@ -116,9 +123,10 @@ namespace Inmobiliaria.Controllers
             
         }
 
-        // POST: PropietariosController/Delete/5
+        // POST: Propietarios/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id, Propietarios entidad)
         {
             try

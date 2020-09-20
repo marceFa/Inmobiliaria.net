@@ -143,6 +143,37 @@ namespace Inmobiliaria.Models
 			}
 			return p;
 		}
+		public Propietarios ObtenerPorEmail(string email)
+		{
+			Propietarios p = null;
+			using (SqlConnection connection = new SqlConnection(connectionString))
+			{
+				string sql = $"SELECT IdProp, Nombre, Apellido, Dni, Telefono, Email FROM Propietarios" +
+					$" WHERE Email=@email";
+				using (SqlCommand command = new SqlCommand(sql, connection))
+				{
+					command.CommandType = CommandType.Text;
+					command.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
+					connection.Open();
+					var reader = command.ExecuteReader();
+					if (reader.Read())
+					{
+						p = new Propietarios
+						{
+							IdProp = reader.GetInt32(0),
+							Nombre = reader.GetString(1),
+							Apellido = reader.GetString(2),
+							Dni = reader.GetString(3),
+							Telefono = reader.GetString(4),
+							Email = reader.GetString(5),
+
+						};
+					}
+					connection.Close();
+				}
+			}
+			return p;
+		}
 		public IList<Propietarios> BuscarPorNombre(string nombre)
 		{
 			List<Propietarios> res = new List<Propietarios>();

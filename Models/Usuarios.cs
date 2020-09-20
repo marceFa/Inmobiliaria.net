@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Inmobiliaria.Models
-{
+{ 
     public class Usuarios
     {
         public int IdUs { get; set; }
@@ -13,5 +14,7 @@ namespace Inmobiliaria.Models
         public string Email { get; set; }
         public string Clave { get; set; }
         public string Rol { get; set; }
+
+        
     }
 }

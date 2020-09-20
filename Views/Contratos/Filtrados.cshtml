@@ -18,7 +18,7 @@
                 <label>Direccion Inmueble</label>
             </th>
             <th>
-                <label>Tipo Inmueble</label>
+                <label>Tipo</label>
             </th>
             <th>
                 <label>Fecha Inicio</label>
@@ -65,9 +65,9 @@
         @item.Vigente
     </td>
     <td>
-        @Html.ActionLink("Edit", "Editar", new { id = item.IdContr }) |
+        @Html.ActionLink("Editar", "Edit", new { id = item.IdContr }) |
         
-        @Html.ActionLink("Delete", "Eliminar", new { id = item.IdContr })                
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdContr })                
     </td>
 </tr>}
     </tbody>

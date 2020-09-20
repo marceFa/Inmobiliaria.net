@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,8 +20,9 @@ namespace Inmobiliaria.Controllers
             this.configuration = configuration;
             repositorioInquilinos = new RepositorioInquilinos(configuration);
         }
-        
-        // GET: InquilinosController1
+
+        // GET: Inquilinos
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Index()
         {
             var lista = repositorioInquilinos.ObtenerTodos();
@@ -28,21 +30,23 @@ namespace Inmobiliaria.Controllers
             
         }
 
-        // GET: InquilinosController1/Details/5
+        // GET: Inquilinos/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: InquilinosController1/Create
+        // GET: Inquilinos/Create
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: InquilinosController1/Create
+        // POST: Inquilinos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Create(Inquilinos i)
         {
             try
@@ -65,7 +69,8 @@ namespace Inmobiliaria.Controllers
             }
         }
 
-        // GET: InquilinosController1/Edit/5
+        // GET: Inquilinos/Edit/5
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Edit(int id)
         {
             var i = repositorioInquilinos.ObtenerPorId(id);
@@ -77,9 +82,10 @@ namespace Inmobiliaria.Controllers
             
         }
 
-        // POST: InquilinosController1/Edit/5
+        // POST: Inquilinos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Edit(int id, IFormCollection collection)
         {
             Inquilinos i = null;
@@ -106,7 +112,8 @@ namespace Inmobiliaria.Controllers
             }
         }
 
-        // GET: InquilinosController1/Delete/5
+        // GET: Inquilinos/Delete/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)
         {
             var i = repositorioInquilinos.ObtenerPorId(id);
@@ -117,9 +124,10 @@ namespace Inmobiliaria.Controllers
             return View(i);
         }
 
-        // POST: InquilinosController1/Delete/5
+        // POST: Inquilinos/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id, Inquilinos entidad)
         {
             try

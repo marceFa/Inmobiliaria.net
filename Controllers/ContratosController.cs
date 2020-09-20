@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Inmobiliaria.Models;
 
 namespace Inmobiliaria.Controllers
 {
+    [Authorize]
     public class ContratosController : Controller
     {
         private readonly IConfiguration configuration;
@@ -23,7 +25,8 @@ namespace Inmobiliaria.Controllers
             repositorioInquilinos = new RepositorioInquilinos(configuration);
             repositorioContratos = new RepositorioContratos(configuration);
         }
-        // GET: ContratosController
+        // GET: Contratos
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Index()
         {
             var lista = repositorioContratos.ObtenerTodos();
@@ -34,13 +37,14 @@ namespace Inmobiliaria.Controllers
             return View(lista);
         }
 
-        // GET: ContratosController/Details/5
+        // GET: Contratos/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ContratosController/Create
+        // GET: Contratos/Create
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Create(int id)
         {
             ViewBag.Inmuebles = repositorioInmuebles.ObtenerPorId(id);
@@ -48,9 +52,10 @@ namespace Inmobiliaria.Controllers
             return View();
         }
 
-        // POST: ContratosController/Create
+        // POST: Contratos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Create(Contratos c)
         {
             try
@@ -84,7 +89,8 @@ namespace Inmobiliaria.Controllers
             }
         }
 
-        // GET: ContratosController/Edit/5
+        // GET: Contratos/Edit/5
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Edit(int id)
         {
             var i = repositorioContratos.ObtenerPorId(id);
@@ -96,9 +102,10 @@ namespace Inmobiliaria.Controllers
             return View(i);
         }
 
-        // POST: ContratosController/Edit/5
+        // POST: Contratos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Edit(int id, Contratos c)
         {
             try
@@ -116,7 +123,8 @@ namespace Inmobiliaria.Controllers
             }
         }
 
-        // GET: ContratosController/Delete/5
+        // GET: Contratos/Delete/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)
         {
             var c = repositorioContratos.ObtenerPorId(id);
@@ -127,9 +135,10 @@ namespace Inmobiliaria.Controllers
             return View(c);
         }
 
-        // POST: ContratosController/Delete/5
+        // POST: Contratos/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id, Contratos c)
         {
             try

@@ -2,12 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Routing;
 
 namespace Inmobiliaria
 {
@@ -18,17 +22,35 @@ namespace Inmobiliaria
         {
             this.configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>//el sitio web valida con cookie
+                {
+                    options.LoginPath = "/Usuarios/Login";
+                    options.LogoutPath = "/Usuarios/Logout";
+                    options.AccessDeniedPath = "/Home/Restringido";
+                });
+                
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Administrador", policy => policy.RequireClaim(ClaimTypes.Role, "Administrador"));
+                options.AddPolicy("Empleado", policy => policy.RequireClaim(ClaimTypes.Role, "Empleado"));
+                options.AddPolicy("Propietario", policy => policy.RequireClaim(ClaimTypes.Role, "Propietario"));
+                options.AddPolicy("Permitidos", policy => policy.RequireClaim(ClaimTypes.Role, "Administrador", "Empleado"));
+                options.AddPolicy("Autorizados", policy => policy.RequireClaim(ClaimTypes.Role, "Administrador", "Propietario"));
+            });
+
+        
             services.AddControllersWithViews();
+            
+                
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -42,16 +64,26 @@ namespace Inmobiliaria
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.None,
+            });
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            // App en ambiente de desarrollo?
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();//página amarilla de errores
+            }
+
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("login", "login/{**accion}", new { controller = "Usuarios", action = "Login" });
+                
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

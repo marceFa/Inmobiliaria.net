@@ -142,3 +142,13 @@ C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\I
 C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Inmuebles\InmPorProp.cshtml.g.cs
 C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Contratos\Busqueda.cshtml.g.cs
 C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Contratos\Filtrados.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Usuarios\Create.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Usuarios\Delete.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Usuarios\Edit.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Usuarios\Index.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privado.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Home\AlgoRestringido.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Home\Restringido.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Home\SuperRestringido.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Home\Galeria.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Usuarios\Login.cshtml.g.cs

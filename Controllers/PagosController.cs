@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +10,7 @@ using Inmobiliaria.Models;
 
 namespace Inmobiliaria.Controllers
 {
+    [Authorize]
     public class PagosController : Controller
     {
         private readonly IConfiguration configuration;
@@ -23,20 +25,22 @@ namespace Inmobiliaria.Controllers
             repositorioPagos = new RepositorioPagos(configuration);
             repositorioInmuebles = new RepositorioInmuebles(configuration);
         }
-        // GET: PagosController
+        // GET: Pagos
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Index()
         {
             var lista = repositorioPagos.ObtenerTodos();
             return View(lista);
         }
 
-        // GET: PagosController/Details/5
+        // GET: Pagos/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
-        
-        // GET: PagosController/Create
+
+        // GET: Pagos/Create
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Create(int id)
         {
             ViewBag.Contratos = repositorioContratos.ObtenerPorInm(id);
@@ -55,9 +59,10 @@ namespace Inmobiliaria.Controllers
             return View();
         }
 
-        // POST: PagosController/Create
+        // POST: Pagos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Create(Pagos p)
         {
             try
@@ -71,6 +76,7 @@ namespace Inmobiliaria.Controllers
                 return View();
             }
         }
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Ver(int id)
         {
             ViewBag.Contratos = repositorioContratos.ObtenerPorId(id);
@@ -78,7 +84,8 @@ namespace Inmobiliaria.Controllers
             return View(pagos);
         }
 
-        // GET: PagosController/Edit/5
+        // GET: Pagos/Edit/5
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Edit(int id)
         {
             var p = repositorioPagos.ObtenerPorId(id);
@@ -86,9 +93,10 @@ namespace Inmobiliaria.Controllers
 
         }
 
-        // POST: PagosController/Edit/5
+        // POST: Pagos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Permitidos")]
         public ActionResult Edit(int id, Pagos p)
         {
             try
@@ -112,7 +120,8 @@ namespace Inmobiliaria.Controllers
         }
 
 
-        // GET: PagosController/Delete/5
+        // GET: Pagos/Delete/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)
         {
             var p = repositorioPagos.ObtenerPorId(id);
@@ -123,9 +132,10 @@ namespace Inmobiliaria.Controllers
             return View(p);
         }
 
-        // POST: PagosController/Delete/5
+        // POST: Pagos/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id, Pagos p)
         {
             try

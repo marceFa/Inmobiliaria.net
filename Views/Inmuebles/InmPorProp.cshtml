@@ -16,9 +16,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdProp)
             </th>
-            <th>
-                <label>Propietario</label>
-            </th>
+            <th>Propietario</th>
             <th>
                 @Html.DisplayNameFor(model => model.Direccion)
             </th>
@@ -75,7 +73,7 @@
         @Html.ActionLink("Editar", "Edit", new { id = item.IdInm }) |
         
         
-@Html   @Html.ActionLink("Eliminar", "Delete", new { id = item.IdInm })                }
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdInm })                }
     </td>
 </tr>}
     </tbody>

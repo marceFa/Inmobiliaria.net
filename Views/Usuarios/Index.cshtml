@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Usuarios>
+
+@{ ViewData["Title"] = "Inicio"; }
+
+<h2>Listado de Usuarios</h2>
+
+<p>
+    <a asp-action="Create">Agregar Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>ID Usuario</label>
+            </th>
+            <th>
+                <label>Nombre</label>
+            </th>
+            <th>
+                <label>Apellido</label>
+            </th>
+            <th>
+                <label>Email</label>
+            </th>
+            <th>
+                <label>Clave</label>
+            </th>
+            <th>
+                <label>Rol</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.IdUs)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Apellido)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Clave)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Rol)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.IdUs }) |
+        @if (User.IsInRole("Administrador"))
+        {
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdUs })            
+        }
+    </td>
+    </tr>}
+    </tbody>
+</table>

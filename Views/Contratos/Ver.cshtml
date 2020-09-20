@@ -15,15 +15,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdContr)
             </th>
-            <th>
-                <label>Inquilino</label>
-            </th>
+            <th>Inquilino</th>
             <th>
                 @Html.DisplayNameFor(model => model.IdInm)
             </th>
-            <th>
-                <label>Ubicacion Inmueble</label>
-            </th>
+            <th>Ubicacion Inmueble</th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaInicio)
             </th>
@@ -42,14 +38,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdContr)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Inquilinos.Nombre) @Html.DisplayFor(modelItem => item.Inquilinos.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdInm)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Inmuebles.Direccion)
