@@ -60,7 +60,7 @@
         @Html.DisplayFor(modelItem => item.Disponible)
     </td>
     <td>
-        @Html.ActionLink("Editar", "../Inmuebles/EditDeUs", new { id = item.IdInm })
+        @Html.ActionLink("Editar", "EditDeUs","Inmuebles", new { id = item.IdInm })
     </td>
 </tr>}
     </tbody>

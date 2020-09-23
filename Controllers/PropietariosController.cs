@@ -110,6 +110,13 @@ namespace Inmobiliaria.Controllers
             }
         }
 
+        [Authorize(Policy = "Propietario")]
+        public ActionResult EditarPerfil(string email)
+        {
+            var prop = repositorioPropietarios.ObtenerPorEmail(email);
+            return View(prop);
+        }
+
         // GET: Propietarios/Delete/5
         [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)

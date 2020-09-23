@@ -6,10 +6,6 @@
 <table class="table">
     <thead>
         <tr>
-
-            <th>
-                <label>Id Inmueble</label>
-            </th>
             <th>
                 <label>Propietario</label>
             </th>
@@ -41,9 +37,6 @@
         @foreach (var item in (IList<Inmuebles>)ViewBag.Filtrados)
         {
 <tr>
-    <td>
-        @item.IdInm
-    </td>
     <td>
         @(item.Propietarios.Nombre + " " + item.Propietarios.Apellido)
     </td>

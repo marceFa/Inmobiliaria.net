@@ -35,8 +35,6 @@ C:\Users\Usuario\source\repos\Inmobiliaria\bin\Debug\netcoreapp3.1\Inmobiliaria.
 C:\Users\Usuario\source\repos\Inmobiliaria\bin\Debug\netcoreapp3.1\Inmobiliaria.pdb
 C:\Users\Usuario\source\repos\Inmobiliaria\bin\Debug\netcoreapp3.1\Inmobiliaria.Views.dll
 C:\Users\Usuario\source\repos\Inmobiliaria\bin\Debug\netcoreapp3.1\Inmobiliaria.Views.pdb
-C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Inmobiliaria.csproj.CoreCompileInputs.cache
-C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Inmobiliaria.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Inmobiliaria.Views.pdb
 C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Inmobiliaria.dll
 C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Inmobiliaria.pdb
@@ -152,3 +150,7 @@ C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\H
 C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Home\SuperRestringido.cshtml.g.cs
 C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Home\Galeria.cshtml.g.cs
 C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Usuarios\Login.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Propietarios\EditarPerfil.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Razor\Views\Inmuebles\EditDeUs.cshtml.g.cs
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Inmobiliaria.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\Inmobiliaria\obj\Debug\netcoreapp3.1\Inmobiliaria.MvcApplicationPartsAssemblyInfo.cache

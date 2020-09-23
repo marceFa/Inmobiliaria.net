@@ -7,7 +7,7 @@
 @if (User.IsInRole("Administrador") || User.IsInRole("Empleado"))
 {
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Agregar Nuevo</a>
     <h2>Inmuebles Disponibles</h2>
 </p>}
 <h2>Ver Inmuebles</h2>
@@ -72,8 +72,7 @@
     <td>
         @Html.DisplayFor(modelItem => item.Costo)
     </td>
-
-    <td>
+     <td>
         @if (User.IsInRole("Permitidos"))
         {
 

@@ -25,7 +25,23 @@ namespace Inmobiliaria.Controllers
         // GET: HomeController1
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole("Administrador"))
+            {
+                return RedirectToAction(nameof(SuperRestringido));
+            }
+            else if (User.IsInRole("Empleado"))
+            {
+                return RedirectToAction(nameof(AlgoRestringido));
+            }
+            else if (User.IsInRole("Propietario"))
+            {
+                return RedirectToAction(nameof(Privado));
+            }
+            else
+            {
+                return View();
+            }
+            
         }
         public IActionResult Galeria()
         {
