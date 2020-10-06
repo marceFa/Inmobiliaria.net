@@ -7,30 +7,30 @@
 <h2>Lista de Propietarios</h2>
 
 <p>
-    <a asp-action="Create">Agregar Nuevo Propietario</a>
+    <a class="btn btn-info" asp-action="Create">Agregar Nuevo Propietario</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                <label>ID Propietario</label>
+            <th bgcolor="#4CAF50"<label>Nº Propietario</label>
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 @Html.DisplayNameFor(model => model.Apellido)
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 @Html.DisplayNameFor(model => model.Dni)
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 @Html.DisplayNameFor(model => model.Telefono)
             </th>
-            <th></th>
+            <th>bgcolor="#4CAF50"</th>
         </tr>
     </thead>
     <tbody>

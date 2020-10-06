@@ -1,51 +1,51 @@
 ﻿@model Inmobiliaria.Models.Pagos
 
-@{
-    ViewData["Title"] = "Eliminar Pagos";
-}
+@{ ViewData["Title"] = "Eliminar Pagos"; }
 
-<h2>Eliminar Registro de Pagos</h2>
+<p>
+    <h4>Eliminar Pagos</h4>
 
-<h3>Esta seguro, que desea Eliminar el Pago???</h3>
+    <h6 class="alert alert-warning"> Usted esta seguro que desea Eliminar el registro de Pago???</h6>
+</p>
 <div>
-    <h4>Pagos</h4>
+
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            <label>ID Pago</label>
+    <dl class="row">
+        <dt class="col-sm-2">
+            <label>Codigo Pago</label>
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdPago)
         </dd>
-        <dt>
+        <dt class="col-sm-2">
             <label>Numero De Pago</label>
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NumPago)
         </dd>
-        <dt>
-            <label>ID Contrato</label>
+        <dt class="col-sm-2">
+            <label>Nº Contrato</label>
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdContr)
         </dd>
-        <dt>
+        <dt class="col-sm-2">
             <label>Fecha De Pago</label>
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FechaPago)
         </dd>
-        <dt>
+        <dt class="col-sm-2">
             <label>Importe</label>
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Importe)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
-        <input type="submit" value="Borrar Pago" class="btn btn-danger" /> |
-        @Html.ActionLink("Regresar a Listado", "Index", "Inmuebles");
-        
+        <input type="submit" value="Borrar Pago" class="btn btn-danger" />  |
+        <a class="btn btn-info" asp-action="Index">Regresar</a>
+
     </form>
 </div>

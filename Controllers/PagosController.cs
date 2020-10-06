@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Inmobiliaria.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Inmobiliaria.Controllers
 {
@@ -68,7 +65,7 @@ namespace Inmobiliaria.Controllers
             try
             {
                 int res = repositorioPagos.Alta(p);
-                return RedirectToAction(nameof(Ver), new {id=p.IdContr});
+                return RedirectToAction(nameof(Ver), new { id = p.IdContr });
             }
             catch (Exception ex)
             {
@@ -110,7 +107,7 @@ namespace Inmobiliaria.Controllers
                 {
                     return View();
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -142,8 +139,8 @@ namespace Inmobiliaria.Controllers
             {
                 repositorioPagos.Baja(id);
                 return RedirectToAction(nameof(Index));
-                
-                
+
+
             }
             catch (Exception ex)
             {

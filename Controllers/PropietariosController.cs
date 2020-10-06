@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Authorization;
-using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Inmobiliaria.Controllers
 {
@@ -59,10 +55,10 @@ namespace Inmobiliaria.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Error de registro Verifique datos!!!"); 
+                    ModelState.AddModelError("", "Error de registro Verifique datos!!!");
                     return View();
                 }
-                
+
             }
             catch
             {
@@ -80,7 +76,7 @@ namespace Inmobiliaria.Controllers
             if (TempData.ContainsKey("Error"))
                 ViewBag.Error = TempData["Error"];
             return View(p);
-            
+
         }
 
         // POST: Propietarios/Edit/5
@@ -127,7 +123,7 @@ namespace Inmobiliaria.Controllers
             if (TempData.ContainsKey("Error"))
                 ViewBag.Error = TempData["Error"];
             return View(p);
-            
+
         }
 
         // POST: Propietarios/Delete/5
@@ -140,9 +136,9 @@ namespace Inmobiliaria.Controllers
             {
                 repositorioPropietarios.Baja(id);
                 return RedirectToAction(nameof(Index));
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
                 ViewBag.StackTrate = ex.StackTrace;

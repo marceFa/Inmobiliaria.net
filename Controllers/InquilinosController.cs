@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Authorization;
-using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System;
 
 
 namespace Inmobiliaria.Controllers
@@ -27,7 +24,7 @@ namespace Inmobiliaria.Controllers
         {
             var lista = repositorioInquilinos.ObtenerTodos();
             return View(lista);
-            
+
         }
 
         // GET: Inquilinos/Details/5
@@ -61,7 +58,7 @@ namespace Inmobiliaria.Controllers
                     ModelState.AddModelError("", "Error de registro, verifique Datos!!!");
                     return View();
                 }
-                
+
             }
             catch
             {
@@ -79,7 +76,7 @@ namespace Inmobiliaria.Controllers
             if (TempData.ContainsKey("Error"))
                 ViewBag.Error = TempData["Error"];
             return View(i);
-            
+
         }
 
         // POST: Inquilinos/Edit/5
@@ -108,7 +105,7 @@ namespace Inmobiliaria.Controllers
                 ViewBag.Error = ex.Message;
                 ViewBag.StackTrate = ex.StackTrace;
                 return View(i);
-                
+
             }
         }
 
@@ -142,7 +139,7 @@ namespace Inmobiliaria.Controllers
                 ViewBag.Error = ex.Message;
                 ViewBag.StackTrate = ex.StackTrace;
                 return View(entidad);
-                
+
             }
         }
     }

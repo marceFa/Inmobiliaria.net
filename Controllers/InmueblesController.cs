@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Inmobiliaria.Models;
+using System;
 
 
 namespace Inmobiliaria.Controllers
@@ -131,7 +127,7 @@ namespace Inmobiliaria.Controllers
             try
             {
                 repositorioInmuebles.Baja(id);
-                
+
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

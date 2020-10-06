@@ -1,12 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Inmobiliaria.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace Inmobiliaria.Controllers
 {
@@ -41,7 +36,7 @@ namespace Inmobiliaria.Controllers
             {
                 return View();
             }
-            
+
         }
         public IActionResult Galeria()
         {
@@ -74,6 +69,6 @@ namespace Inmobiliaria.Controllers
             return View();
         }
 
-        
+
     }
 }

@@ -1,11 +1,9 @@
 ﻿@model Inmobiliaria.Models.Inquilinos
 
-@{
-    ViewData["Title"] = "Agregar Inquilino";
-}
+@{ ViewData["Title"] = "Agregar Inquilino"; }
 
 
-<h2>Inquilinos</h2>
+h2>Inquilinos</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -32,28 +30,25 @@
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DireccionTrabajo" class="control-label"></label>
+                <label asp-for="DireccionTrabajo" class="control-label">Direccion Trabajo</label>
                 <input asp-for="DireccionTrabajo" class="form-control" />
                 <span asp-validation-for="DireccionTrabajo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Nombre_Garante" class="control-label"></label>
+                <label asp-for="Nombre_Garante" class="control-label">Nombre Garante</label>
                 <input asp-for="Nombre_Garante" class="form-control" />
                 <span asp-validation-for="Nombre_Garante" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Dni_Garante" class="control-label"></label>
+                <label asp-for="Dni_Garante" class="control-label">Dni Garante</label>
                 <input asp-for="Dni_Garante" class="form-control" />
                 <span asp-validation-for="Dni_Garante" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Agregar" class="btn btn-primary" />
+                <input type="submit" value="Agregar" class="btn btn-success" />  |
+                <a class="btn btn-info" asp-action="Index">Volver Listado Inquilinos</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Volver al Listado Inquilinos</a>
 </div>
 

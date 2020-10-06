@@ -2,40 +2,37 @@
 
 @{ ViewData["Title"] = "Ver"; }
 
-<h2>Ver</h2>
+<h2>Ver Pagos</h2>
 
 <p>
-    <h4>Contrato:@ViewBag.Contratos.IdContr -- Inquilino: @ViewBag.Contratos.Inquilinos.Nombre  @ViewBag.Contratos.Inquilinos.Apellido</h4>
-    <h4>Inmueble: @ViewBag.Contratos.Inmuebles.Tipo -- Direccion: @ViewBag.Contratos.Inmuebles.Direccion</h4>
+    <h6 class="alert alert-success">
+        Pagos correspondientes al Contrato Nº: @ViewBag.Contratos.IdContr Inquilino: @ViewBag.Contratos.Inquilinos.Nombre  @ViewBag.Contratos.Inquilinos.Apellido
+        del Inmueble de tipo: @ViewBag.Contratos.Inmuebles.Tipo con Direccion: @ViewBag.Contratos.Inmuebles.Direccion
+    </h6>
 </p>
-<table class="table">
+
+<table height="100" width="100" background="../imagenes/inmo.png" class="table">
     <thead>
         <tr>
-            <th>
-                <label>ID Pago</label>
-            </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 <label>Numero De Pago</label>
             </th>
-            <th>
-                <label>Contrato</label>
+            <th bgcolor="#4CAF50">
+                <label>Nº Contrato</label>
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 <label>Fecha De Pago</label>
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 <label>Importe</label>
             </th>
-            <th></th>
+            <th bgcolor="#4CAF50"></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
 <tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.IdPago)
-    </td>
     <td>
         @Html.DisplayFor(modelItem => item.NumPago)
     </td>
@@ -54,9 +51,10 @@
         @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPago }) |
     </td>
 
-</tr>}       @Html.ActionLink("Realizar Pago", "Create", "Pagos", new { id = @ViewBag.Contratos.IdInm })
+</tr>
+}       @Html.ActionLink("Realizar Pago", "Create", "Pagos", new { id = @ViewBag.Contratos.IdInm })
 </tbody>
 </table>
 <div>
-    <a asp-action="Index">Volver</a>
+    <a class="btn btn-info" asp-action="Index">Regresar</a>
 </div>
