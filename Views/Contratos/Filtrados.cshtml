@@ -5,34 +5,20 @@
 <h2>Filtrados</h2>
 
 
-<table class="table">
+<table height="100" width="100" background="../imagenes/inmo.png" class="table">
     <thead>
         <tr>
-            <th>
-                <label>ID Contrato</label>
+            <th bgcolor="#4CAF50">Nº Contrato</th>
+            <th bgcolor="#4CAF50">Inquilino</th>
+            <th bgcolor="#4CAF50">Direccion Inmueble</th>
+            <th bgcolor="#4CAF50">Tipo</th>
+            <th bgcolor="#4CAF50">Fecha Inicio</th>
+            <th bgcolor="#4CAF50">Fecha Cierre</th>
+            <th bgcolor="#4CAF50">Importe</th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Vigente)
             </th>
-            <th>
-                <label>Inquilino</label>
-            </th>
-            <th>
-                <label>Direccion Inmueble</label>
-            </th>
-            <th>
-                <label>Tipo</label>
-            </th>
-            <th>
-                <label>Fecha Inicio</label>
-            </th>
-            <th>
-                <label>Fecha Cierre</label>
-            </th>
-            <th>
-                <label>Importe</label>
-            </th>
-            <th>
-                <label>Vigente</label>
-            </th>
-
+            <th bgcolor="#4CAF50"></th>
         </tr>
     </thead>
     <tbody>
@@ -62,13 +48,17 @@
         @item.Monto
     </td>
     <td>
-        @item.Vigente
+        @Html.DisplayFor(modelItem => item.Vigente)
     </td>
     <td>
         @Html.ActionLink("Editar", "Edit", new { id = item.IdContr }) |
-        
-        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdContr })                
+
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdContr })
     </td>
-</tr>}
+</tr>
+}
     </tbody>
 </table>
+<div>
+    <a class="btn btn-info" asp-action="Index">Regresar</a>
+</div>

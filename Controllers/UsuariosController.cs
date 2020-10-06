@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Inmobiliaria.Models;
+﻿using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -14,7 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Net.Http.Headers;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Inmobiliaria.Controllers
 {
@@ -27,7 +24,9 @@ namespace Inmobiliaria.Controllers
         public UsuariosController(IConfiguration configuration)
         {
             this.configuration = configuration;
+#pragma warning disable CS1717 // Asignación a la misma variable. ¿Quería asignar otro elemento?
             this.environment = environment;
+#pragma warning restore CS1717 // Asignación a la misma variable. ¿Quería asignar otro elemento?
             repositorioUsuarios = new RepositorioUsuarios(configuration);
         }
 
@@ -55,49 +54,45 @@ namespace Inmobiliaria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "Administrador")]
-        public ActionResult Create (Usuarios i)
+#pragma warning disable CS0161 // 'UsuariosController.Create(Usuarios)': no todas las rutas de acceso de código devuelven un valor
+        public ActionResult Create(Usuarios u)
+#pragma warning restore CS0161 // 'UsuariosController.Create(Usuarios)': no todas las rutas de acceso de código devuelven un valor
         {
+            if (!ModelState.IsValid)
+                return View();
             try
             {
-                if (ModelState.IsValid)
+                string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                        password: u.Clave,
+                        salt: System.Text.Encoding.ASCII.GetBytes(configuration["Salt"]),
+                        prf: KeyDerivationPrf.HMACSHA1,
+                        iterationCount: 1000,
+                        numBytesRequested: 256 / 8));
+                u.Clave = hashed;
+               
+                var nbreRnd = Guid.NewGuid();//posible nombre aleatorio
+                int res = repositorioUsuarios.Alta(u);
+                if (u.AvatarFile != null && u.IdUs > 0)
                 {
-                    Usuarios us = repositorioUsuarios.ObtenerPorEmail(i.Email);
-
-                    if (us == null)
+                    string wwwPath = environment.WebRootPath;
+                    string path = Path.Combine(wwwPath, "img");
+                    if (!Directory.Exists(path))
                     {
-
-                        i.Clave = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                            password: i.Clave,
-                            salt: System.Text.Encoding.ASCII.GetBytes("Salt"),
-                            prf: KeyDerivationPrf.HMACSHA1,
-                            iterationCount: 1000,
-                            numBytesRequested: 256 / 8));
-
-                        int res = repositorioUsuarios.Alta(i);
-                        if (i.AvatarFile != null && i.IdUs > 0)
-                        {
-                            string wwwPath = environment.WebRootPath;
-                            string path = Path.Combine(wwwPath, "img");
-                            if (!Directory.Exists(path))
-                            {
-                                Directory.CreateDirectory(path);
-                            }
-                            //Path.GetFileName(u.AvatarFile.FileName);//este nombre se puede repetir
-                            string fileName = "avatar_" + i.IdUs + Path.GetExtension(i.AvatarFile.FileName);
-                            string pathCompleto = Path.Combine(path, fileName);
-                            i.Avatar = Path.Combine("/img", fileName);
-                            using (FileStream stream = new FileStream(pathCompleto, FileMode.Create))
-                            {
-                                i.AvatarFile.CopyTo(stream);
-                            }
-
-
-                            return RedirectToAction(nameof(Index));
-                        }
+                        Directory.CreateDirectory(path);
                     }
+                    //Path.GetFileName(u.AvatarFile.FileName);//este nombre se puede repetir
+                    string fileName = "avatar_" + u.IdUs + Path.GetExtension(u.AvatarFile.FileName);
+                    string pathCompleto = Path.Combine(path, fileName);
+                    u.Avatar = Path.Combine("/img", fileName);
+                    using (FileStream stream = new FileStream(pathCompleto, FileMode.Create))
+                    {
+                        u.AvatarFile.CopyTo(stream);
+                    }
+                    repositorioUsuarios.Modificacion(u);
                 }
+                return RedirectToAction(nameof(Index));
             }
-            catch
+            catch 
             {
                 return View();
             }
@@ -130,7 +125,7 @@ namespace Inmobiliaria.Controllers
                         iterationCount: 1000,
                         numBytesRequested: 256 / 8));
                     int res = repositorioUsuarios.Modificacion(i);
-                        return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
 
                 }
                 else

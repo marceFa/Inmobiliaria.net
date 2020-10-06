@@ -3,32 +3,31 @@
 
 <h2>Filtrados</h2>
 
-<table class="table">
+<table height="100" width="100" background="../imagenes/inmo.png" class="table">
+
     <thead>
         <tr>
-            <th>
+            <th bgcolor="#4CAF50">
                 <label>Propietario</label>
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 <label>Direccion</label>
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 <label>Tipo</label>
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 <label>Uso</label>
 
             </th>
-            <th>
-                <label>Cantidad de Ambientes</label>
-
+            <th bgcolor="#4CAF50">
+                <label>Cantidad Ambientes</label>
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 <label>Costo</label>
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 <label>Disponible</label>
-
             </th>
             <th></th>
         </tr>
@@ -41,24 +40,31 @@
         @(item.Propietarios.Nombre + " " + item.Propietarios.Apellido)
     </td>
     <td>
-        @item.Direccion
+        @Html.DisplayFor(modelItem => item.Direccion)
     </td>
     <td>
-        @item.Tipo
+        @Html.DisplayFor(modelItem => item.Tipo)
     </td>
     <td>
-        @item.Uso
+        @Html.DisplayFor(modelItem => item.Uso)
     </td>
     <td>
-        @item.CantAmbientes
+        @Html.DisplayFor(modelItem => item.CantAmbientes)
     </td>
     <td>
-        @item.Costo
+        @Html.DisplayFor(modelItem => item.Costo)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.Disponible)
+
     </td>
-</tr>}
+</tr>
+}
+
     </tbody>
 </table>
+<div>
+    <a class="btn btn-info" asp-action="Index">Regresar</a>
+</div>
+
 

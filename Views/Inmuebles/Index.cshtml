@@ -1,41 +1,40 @@
 ﻿@model IEnumerable<Inmobiliaria.Models.Inmuebles>
 
-@{
-    ViewData["Title"] = "Inmuebles";
-}
+@{ ViewData["Title"] = "Inmuebles"; }
 
 <h1>Todos los Inmuebles</h1>
+
 <h4><a class="nav-link" href="../Inmuebles/Disponibles">Ver solo Disponibles</a></h4>
 <h4> @Html.ActionLink("Filtrar Libres Por Fecha", "Busqueda", "Inmuebles")</h4>
 
 <p>
-    <a asp-action="Create">Agregar Inmueble</a>
+    <a class="btn btn-primary" asp-action="Create">Agregar Inmueble</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th bgcolor="#4CAF50">
                 @Html.DisplayNameFor(model => model.Propietarios)
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 @Html.DisplayNameFor(model => model.Direccion)
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 @Html.DisplayNameFor(model => model.Tipo)
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 @Html.DisplayNameFor(model => model.Uso)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CantAmbientes)
+            <th bgcolor="#4CAF50" <label>Nº Ambientes</label>
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 @Html.DisplayNameFor(model => model.Costo)
             </th>
-            <th>
+            <th bgcolor="#4CAF50">
                 @Html.DisplayNameFor(model => model.Disponible)
             </th>
-            <th></th>
+            <th bgcolor="#4CAF50"></th>
         </tr>
     </thead>
     <tbody>
