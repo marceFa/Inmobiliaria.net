@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\Desktop\\4to_Cuatrimestre\\Net\\Inmobiliaria.net-master\\Inmobiliaria.csproj": {}
+    "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\Inmobiliaria.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\Desktop\\4to_Cuatrimestre\\Net\\Inmobiliaria.net-master\\Inmobiliaria.csproj": {
+    "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\Inmobiliaria.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\4to_Cuatrimestre\\Net\\Inmobiliaria.net-master\\Inmobiliaria.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\Inmobiliaria.csproj",
         "projectName": "Inmobiliaria",
-        "projectPath": "C:\\Users\\Usuario\\Desktop\\4to_Cuatrimestre\\Net\\Inmobiliaria.net-master\\Inmobiliaria.csproj",
+        "projectPath": "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\Inmobiliaria.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Desktop\\4to_Cuatrimestre\\Net\\Inmobiliaria.net-master\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -38,6 +38,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"

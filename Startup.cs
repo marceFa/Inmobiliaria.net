@@ -1,7 +1,9 @@
+using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,8 +26,22 @@ namespace Inmobiliaria
                     options.LoginPath = "/Usuarios/Login";
                     options.LogoutPath = "/Usuarios/Logout";
                     options.AccessDeniedPath = "/Home/Restringido";
-                });
+                })
 
+            .AddJwtBearer(options =>//la api web valida con token
+             {
+                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                 {
+                     ValidateIssuer = true,
+                     ValidateAudience = true,
+                     ValidateLifetime = true,
+                     ValidateIssuerSigningKey = true,
+                     ValidIssuer = configuration["TokenAuthentication:Issuer"],
+                     ValidAudience = configuration["TokenAuthentication:Audience"],
+                     IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes(
+                         configuration["TokenAuthentication:SecretKey"])),
+                 };
+             });
 
             services.AddAuthorization(options =>
             {
@@ -35,12 +51,14 @@ namespace Inmobiliaria
                 options.AddPolicy("Permitidos", policy => policy.RequireClaim(ClaimTypes.Role, "Administrador", "Empleado"));
                 options.AddPolicy("Autorizados", policy => policy.RequireClaim(ClaimTypes.Role, "Administrador", "Propietario"));
             });
+                 services.AddMvc();
+                 services.AddControllersWithViews();
 
+                 services.AddDbContext<DataContext>(
+                        options => options.UseSqlServer(
+                 configuration["ConnectionStrings:DefaultConnection"]));
 
-            services.AddControllersWithViews();
-
-
-        }
+            }
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +74,21 @@ namespace Inmobiliaria
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            // Uso de archivos estáticos (*.html, *.css, *.js, etc.)
+            app.UseStaticFiles();
+            app.UseRouting();
+            // Permitir cookies
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.None,
+            });
+            // Habilitar autenticación
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
