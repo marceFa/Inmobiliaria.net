@@ -24,15 +24,15 @@ namespace Inmobiliaria.Api
         {
             this.contexto = contexto;
         }
-        // GET: api/<PagoController>
+        // GET: api/<PagosController>
         [HttpGet]
         public  async Task<IActionResult> Get()
         {
             try
             {
-                var usuario = User.Identity.Name;
+                var usuarios = User.Identity.Name;
                 var res = contexto.Pagos.Include(e => e.Contratos)
-                                       .Where(e => e.Contratos.Inmuebles.Propietarios.Email == usuario)
+                                       .Where(e => e.Contratos.Inmuebles.Propietarios.Email == usuarios)
                                        .Select(x => new { x.NumPago, x.FechaPago, x.Importe });
 
                 return Ok(res);
@@ -49,9 +49,9 @@ namespace Inmobiliaria.Api
         {
             try
             {
-                var usuario = User.Identity.Name;
+                var usuarios = User.Identity.Name;
                 var res = contexto.Pagos.Include(e => e.Contratos)
-                                       .Where(e => e.Contratos.Inmuebles.Propietarios.Email == usuario && e.IdContr == id)
+                                       .Where(e => e.Contratos.Inmuebles.Propietarios.Email == usuarios && e.IdContr == id)
                                        .Select(x => new { x.NumPago, x.FechaPago, x.Importe });
                 return Ok(res);
             }
@@ -61,7 +61,7 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // POST api/<PagoController>
+        // POST api/<PagosController>
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] Pagos pagos)
         {
@@ -69,7 +69,7 @@ namespace Inmobiliaria.Api
             {
                 if (ModelState.IsValid)
                 {
-                    var usuario = User.Identity.Name;
+                    var usuarios = User.Identity.Name;
                     pagos.IdContr = contexto.Contratos.FirstOrDefault(e => e.Inmuebles.Propietarios.Email == User.Identity.Name).IdContr;
                     contexto.Pagos.Add(pagos);
                     contexto.SaveChanges();
@@ -106,10 +106,20 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // DELETE api/<PagoController>/5
+        // DELETE api/<PagosController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var pagos = await contexto.Pagos.FindAsync(id);
+            if (pagos == null)
+            {
+                return NotFound();
+            }
+
+            contexto.Pagos.Remove(pagos);
+            await contexto.SaveChangesAsync();
+
+            return (IActionResult)pagos;
         }
     }
 }

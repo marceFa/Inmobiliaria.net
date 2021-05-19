@@ -22,14 +22,15 @@ namespace Inmobiliaria.Api
             this.contexto = contexto;
         }
 
-        // GET: api/<controller>
+        // GET: api/<InmueblesController>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             try
             {
-                var usuario = User.Identity.Name;
-                return Ok(contexto.Inmuebles.Include(e => e.Propietarios).Where(e => e.Propietarios.Email == usuario));
+                var usuarios = User.Identity.Name;
+                var res= contexto.Inmuebles.Include(e => e.Propietarios).Where(e => e.Propietarios.Email == usuarios);
+                return Ok(res);
             }
             catch (Exception ex)
             {
@@ -37,14 +38,14 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // GET api/<controller>/5
+        // GET api/<InmueblesController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             try
             {
-                var usuario = User.Identity.Name;
-                return Ok(contexto.Inmuebles.Include(e => e.Propietarios).Where(e => e.Propietarios.Email == usuario).Single(e => e.IdProp == id));
+                var usuarios = User.Identity.Name;
+                return Ok(contexto.Inmuebles.Include(e => e.Propietarios).Where(e => e.Propietarios.Email == usuarios).Single(e => e.IdInm == id));
             }
             catch (Exception ex)
             {
@@ -52,9 +53,9 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // POST api/<controller>
+        // POST api/<InmueblesController>
         [HttpPost]
-        public async Task<IActionResult> Post(Inmuebles entidad)
+        public async Task<IActionResult> Post([FromForm]Inmuebles entidad)
         {
             try
             {
@@ -63,7 +64,7 @@ namespace Inmobiliaria.Api
                     entidad.IdProp = contexto.Propietarios.Single(e => e.Email == User.Identity.Name).IdProp;
                     contexto.Inmuebles.Add(entidad);
                     contexto.SaveChanges();
-                    return CreatedAtAction(nameof(Get), new { id = entidad.IdProp }, entidad);
+                    return CreatedAtAction(nameof(Get), new { id = entidad.IdInm }, entidad);
                 }
                 return BadRequest();
             }
@@ -73,13 +74,13 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // PUT api/<controller>/5
+        // PUT api/<InmueblesController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, Inmuebles entidad)
         {
             try
             {
-                if (ModelState.IsValid && contexto.Inmuebles.AsNoTracking().Include(e => e.Propietarios).FirstOrDefault(e => e.IdProp == id && e.Propietarios.Email == User.Identity.Name) != null)
+                if (ModelState.IsValid && contexto.Inmuebles.AsNoTracking().Include(e => e.Propietarios).FirstOrDefault(e => e.IdProp == id && e.Propietarios.Email == User.Identity.Name) != null) 
                 {
                     entidad.IdProp = id;
                     contexto.Inmuebles.Update(entidad);
@@ -94,7 +95,7 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // DELETE api/<controller>/5
+        // DELETE api/<InmueblesController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -115,21 +116,16 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // DELETE api/<controller>/5
-        [HttpDelete("BajaLogica/{id}")]
-        public async Task<IActionResult> BajaLogica(int id)
+        
+        // GET api/<InmueblesController>/disponibles
+        [HttpGet("disponibles")]
+        public async Task<IActionResult> InmueblesDisponibles()
         {
             try
             {
-                var entidad = contexto.Inmuebles.Include(e => e.Propietarios).FirstOrDefault(e => e.IdProp == id && e.Propietarios.Email == User.Identity.Name);
-                if (entidad != null)
-                {
-                    entidad.CantAmbientes = -1;//cambiar por estado = 0
-                    contexto.Inmuebles.Update(entidad);
-                    contexto.SaveChanges();
-                    return Ok();
-                }
-                return BadRequest();
+                var usuarios = User.Identity.Name;
+                return Ok(contexto.Inmuebles.Include(e => e.Propietarios).Where(e => e.Propietarios.Email == usuarios && e.Disponible).ToList());
+
             }
             catch (Exception ex)
             {

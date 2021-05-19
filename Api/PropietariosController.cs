@@ -32,7 +32,7 @@ namespace Inmobiliaria.Api
         }
         // GET: api/<controller>
         [HttpGet]
-        public async Task<ActionResult<Propietarios>> Get()
+        public async Task<ActionResult<IEnumerable<Propietarios>>> Get()
         {
             try
             {
@@ -41,12 +41,13 @@ namespace Inmobiliaria.Api
                     .Where(x => x.Duenio.Nombre == "")//.ToList() => lista de inmuebles
                     .Select(x => x.Duenio)
                     .ToList();//lista de propietarios*/
-                var usuario = User.Identity.Name;
+                var usuarios = User.Identity.Name;
                 /*contexto.Contratos.Include(x => x.Inquilino).Include(x => x.Inmueble).ThenInclude(x => x.Duenio)
                     .Where(c => c.Inmueble.Duenio.Email....);*/
                 /*var res = contexto.Propietarios.Select(x => new { x.Nombre, x.Apellido, x.Email })
                     .SingleOrDefault(x => x.Email == usuario);*/
-                return await contexto.Propietarios.SingleOrDefaultAsync(x => x.Email == usuario);
+                var res = contexto.Propietarios.Select(x => new { x.Nombre, x.Apellido, x.Dni, x.Telefono, x.Email }).SingleOrDefault(x => x.Email == usuarios);
+                return Ok(res);
             }
             catch (Exception ex)
             {
@@ -54,18 +55,20 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // GET api/<controller>/5
+        // GET api/<PropietariosController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            try
-            {
-                return Ok(contexto.Propietarios.SingleOrDefault(x => x.IdProp == id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
+            if (id <= 0)
+                return NotFound();
+
+            var res = contexto.Propietarios.FirstOrDefault(x => x.IdProp == id);
+
+            if (res != null)
+                return Ok(res);
+
+            else
+                return NotFound();
         }
 
         // GET api/<controller>/GetAll
@@ -128,17 +131,17 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // POST api/<controller>
+        // POST api/<PropietariosController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] Propietarios entidad)
+        public async Task<IActionResult> Post([FromForm] Propietarios propietarios)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    await contexto.Propietarios.AddAsync(entidad);
+                    await contexto.Propietarios.AddAsync(propietarios);
                     contexto.SaveChanges();
-                    return CreatedAtAction(nameof(Get), new { id = entidad.IdProp }, entidad);
+                    return CreatedAtAction(nameof(Get), new { id = propietarios.IdProp }, propietarios);
                 }
                 return BadRequest();
             }
@@ -148,18 +151,18 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // PUT api/<controller>/5
+        // PUT api/<PropietariosController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromForm] Propietarios entidad)
+        public async Task<IActionResult> Put(int id, [FromForm] Propietarios propietarios)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    entidad.IdProp = id;
-                    contexto.Propietarios.Update(entidad);
+                    propietarios.IdProp = id;
+                    contexto.Propietarios.Update(propietarios);
                     await contexto.SaveChangesAsync();
-                    return Ok(entidad);
+                    return Ok(propietarios);
                 }
                 return BadRequest();
             }
@@ -169,8 +172,8 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // DELETE api/<controller>/borra/5
-        [HttpDelete("borra{id}")]
+        // DELETE api/<PropietariosController>/borrar/5
+        [HttpDelete("borrar{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\Inmobiliaria.csproj": {}
+    "C:\\Users\\Usuario\\source\\repos\\Inmobiliaria.net\\Inmobiliaria.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\Inmobiliaria.csproj": {
+    "C:\\Users\\Usuario\\source\\repos\\Inmobiliaria.net\\Inmobiliaria.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\Inmobiliaria.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\source\\repos\\Inmobiliaria.net\\Inmobiliaria.csproj",
         "projectName": "Inmobiliaria",
-        "projectPath": "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\Inmobiliaria.csproj",
+        "projectPath": "C:\\Users\\Usuario\\source\\repos\\Inmobiliaria.net\\Inmobiliaria.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\source\\repos\\Inmobiliaria.net\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",

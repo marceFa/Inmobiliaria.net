@@ -41,22 +41,20 @@ namespace Inmobiliaria.Api
             }
 
 
-
-
         }
 
-        // GET api/<ContratoController>/5
+        // GET api/<ContratosController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             try
             {
-                var usuario = User.Identity.Name;
+                var usuarios = User.Identity.Name;
                 var res = contexto.Contratos.Include(x => x.Inquilinos)
                     .Include(x => x.Inmuebles)
                     .ThenInclude(x => x.Propietarios)
-                    .Where(c => c.Inmuebles.Propietarios.Email == usuario)
-                    .Single(e => e.IdInm == id);
+                    .Where(c => c.Inmuebles.Propietarios.Email == usuarios)
+                    .Single(e => e.IdContr == id);
 
                 return Ok(res);
             }
@@ -66,7 +64,7 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // POST api/<ContratoController>
+        // POST api/<ContratosController>
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] Contratos contratos)
         {
@@ -87,7 +85,7 @@ namespace Inmobiliaria.Api
                 return BadRequest(ex);
             }
         }
-
+        // GET api/<ContratosController>/3
         [HttpGet("inmueble/{IdInmueble}")]
         public async Task<ActionResult<Contratos>> GetObtenerTodosPorInm(int IdInm)
         {
@@ -103,9 +101,9 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // PUT api/<ContratoController>/5
+        // PUT api/<ContratosController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Contratos contratos)
+        public async Task<IActionResult> Put(int id, [FromForm] Contratos contratos)
         {
             try
             {
@@ -127,7 +125,7 @@ namespace Inmobiliaria.Api
         }
 
 
-        // DELETE api/<ContratoController>/5
+        // DELETE api/<ContratosController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

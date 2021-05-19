@@ -20,7 +20,7 @@ namespace Inmobiliaria.Models
         public DbSet<Pagos> Pagos { get; set; }
 
 
-        public DbSet<Persona> Personas { get; set; }
+        public DbSet<Personas> Personas { get; set; }
         public DbSet<Pasatiempo> Pasatiempos { get; set; }
         public DbSet<PersonaPasatiempo> PersonaPasatiempos { get; set; }
 
